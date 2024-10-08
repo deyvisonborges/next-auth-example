@@ -1,9 +1,13 @@
+"use client";
+
+import registerAction from "./actions";
+
 export default function RegisterPage() {
   return (
-    <form>
-      <input type="text" placeholder="Nome" id="name" />
-      <input type="email" placeholder="E-mail" id="email" />
-      <input type="password" placeholder="Senha" id="password" />
+    <form action={registerAction}>
+      <input type="text" placeholder="Nome" id="name" name="name" />
+      <input type="email" placeholder="E-mail" id="email" name="email"/>
+      <input type="password" placeholder="Senha" id="password" name="password" />
 
       <button>Cadastrar</button>
     </form>

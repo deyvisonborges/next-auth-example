@@ -1,3 +1,4 @@
+import db from "@/lib/db";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
@@ -25,9 +26,20 @@ export const {
         },
         password: { type: "password" },
       },
-      authorize: () => {
-        console.log("op");
-        return null;
+      authorize: async (credentials) => {
+        if (!credentials.email) {
+          return null;
+        }
+
+        const user = await db.user.findFirst({
+          where: { email: String(credentials.email) },
+        });
+
+        if (!user) {
+          return null;
+        }
+
+        return { ...user };
       },
     }),
   ],
