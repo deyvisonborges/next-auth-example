@@ -59,4 +59,13 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    jwt: ({ token }) => {
+      return token;
+    },
+    session: ({ session, token }) => {
+      console.log(token);
+      return { ...session };
+    },
+  },
 });
