@@ -1,37 +1,33 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export function FormLogin() {
+  const [formError, setFormError] = useState<string>("");
   const router = useRouter();
 
-  const [formError, setFormError] = useState<string>("");
-  const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      // const data = Object.fromEntries(new FormData(e.currentTarget));
-      // const data = new FormData(e.currentTarget);
-      // const email = data.get("email") as string;
-      // const password = data.get("password") as string;
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // const data = Object.fromEntries(new FormData(e.currentTarget));
+    // const data = new FormData(e.currentTarget);
+    // const email = data.get("email") as string;
+    // const password = data.get("password") as string;
 
-      signIn("credentials", {
-        email: "deyv@email.com",
-        password: "123123",
-        redirect: false,
-        redirectTo: "/dashboard",
+    signIn("credentials", {
+      email: "dev@dev.com",
+      password: "123123",
+      redirect: false,
+      redirectTo: "/",
+    })
+      .then((res) => {
+        if (res && res.error === "CredentialsSignin") {
+          setFormError("Erro ao fazer o login");
+        } else {
+          router.push("/dashboard");
+        }
       })
-        .then((res) => {
-          if (res && res.error === "CredentialsSignin") {
-            console.error(res.error);
-            setFormError("Erro ao fazer o login");
-          } else {
-            router.push("/dashboard");
-          }
-        })
-        .catch((e) => console.log(e));
-    },
-    [router]
-  );
+      .catch((e) => console.log(e));
+  };
 
   return (
     <>

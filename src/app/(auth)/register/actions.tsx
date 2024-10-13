@@ -13,7 +13,7 @@ export default async function registerAction(formData: FormData) {
   }
 
   const user = await db.user.findUnique({
-    where: { email: email, id: "" },
+    where: { email: email },
   });
 
   if (user) {

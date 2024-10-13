@@ -17,6 +17,8 @@ export default function Home() {
   return (
     <div>
       <DynamicComponent />
+
+      <button>Login com Github</button>
     </div>
   );
 }

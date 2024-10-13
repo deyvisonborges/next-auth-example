@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { FormLogin } from "./form-login";
 import { useSession } from "next-auth/react";
